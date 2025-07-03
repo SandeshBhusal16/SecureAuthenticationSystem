@@ -20,7 +20,6 @@ A full-stack authentication system built with modern technologies. This project 
 - User profile management with avatar upload
 - Account activation via email tokens
 - Password creation and reset functionality
-- Account activation via email tokens
 - User profile management
 - **Automatic password expiry tracking**
 - **Password change history and notifications**
@@ -40,91 +39,113 @@ A full-stack authentication system built with modern technologies. This project 
 
 - **Runtime**: Node.js
 - **Framework**: Express.js 5.1.0
-  @@ -62,80 +70,82 @@ A full-stack authentication system built with modern technologies. This project
+- **Database**: MongoDB with Mongoose
+- **Authentication**: JWT (jsonwebtoken)
+- **Password Security**: bcrypt
+- **Email Service**: Nodemailer
+- **File Upload**: Multer with Cloudinary
+- **Validation**: express-validator
+- **Environment**: dotenv
+
+### **Frontend (FE)**
+
+- **Framework**: React 18 with TypeScript
+- **Build Tool**: Vite
+- **Styling**: Tailwind CSS
+- **HTTP Client**: Axios
+- **Routing**: React Router DOM
+- **State Management**: React Context/Hooks
+- **Form Handling**: React Hook Form
+- **Icons**: Lucide React
 
 ## 📁 Project Structure
 
 ```
-
 LoginPage/
-├── BE/ # Backend Application
-│ ├── config/ # Configuration files
-│ │ ├── cloudinary.config.js # Cloud storage config
-│ │ └── mongoose.config.js # Database configuration
-│ ├── router/ # API routes
-│ │ ├── auth.routes.js # Authentication routes
-│ │ └── index.js # Route aggregator
-│ ├── src/
-│ │ ├── controller/ # Business logic controllers
-│ │ │ └── auth.controller.js
-│ │ ├── middleware/ # Express middlewares
-│ │ │ ├── authcheck.js # JWT authentication
-│ │ │ ├── uploader.js # File upload handling
-│ │ │ └── validator.js # Request validation
-│ │ ├── modal/ # Database models
-│ │ │ └── auth.modal.js # User model schema
-│ │ ├── services/ # Business services
-│ │ │ ├── auth.service.js # Authentication logic
-│ │ │ └── email.service.js # Email service
-│ │ └── utils/ # Utility functions
-│ │ ├── helper.js # Helper functions
-│ │ └── validator/ # Input validators
-│ │ └── auth.validate.js
-│ ├── upload/ # File upload directory
-│ ├── app.js # Express app setup
-│ └── package.json # Backend dependencies
-├── FE/ # Frontend Application
-│ ├── public/ # Static assets
-│ │ └── vite.svg
-│ ├── src/
-│ │ ├── assets/ # Images and icons
-│ │ │ ├── react.svg
-│ │ │ └── spinner.tsx
-│ │ ├── component/ # Reusable components
-│ │ │ ├── Input.tsx # Custom input component
-│ │ │ └── PasswordCheckWrapper.tsx
-│ │ ├── hooks/ # Custom React hooks
-│ │ │ └── usePasswordStatus.ts
-│ │ ├── Pages/ # Application pages
-│ │ │ ├── ChangePassword/ # Password change functionality
-│ │ │ │ └── index.tsx
-│ │ │ ├── CreatePassword/ # Password creation
-│ │ │ │ ├── index.tsx
-│ │ │ │ └── successPage.tsx
-│ │ │ ├── homepage.tsx/ # Dashboard/Home
-│ │ │ │ └── index.tsx
-│ │ │ ├── Login/ # Login page
-│ │ │ │ └── index.tsx
-│ │ │ ├── Register/ # User registration
-│ │ │ │ ├── index.tsx
-│ │ │ │ └── successPage.tsx
-│ │ │ ├── UpdatePassword/ # Password updates
-│ │ │ │ └── index.tsx
-│ │ │ └── VarifyMail/ # Email verification
-│ │ │ ├── index.tsx
-│ │ │ └── successPage.tsx
-│ │ ├── Route/ # Routing configuration
-│ │ │ ├── index.tsx # Main router
-│ │ │ └── protectedRoute.tsx # Route protection
-│ │ ├── App.tsx # Main app component
-│ │ ├── main.tsx # App entry point
-│ │ ├── index.css # Global styles
-│ │ └── vite-env.d.ts # Vite environment types
-│ ├── eslint.config.js # ESLint configuration
-│ ├── index.html # HTML template
-│ ├── package.json # Frontend dependencies
-│ ├── tsconfig.app.json # TypeScript app config
-│ ├── tsconfig.json # TypeScript base config
-│ ├── tsconfig.node.json # TypeScript node config
-│ └── vite.config.ts # Vite configuration
-├── PASSWORD_EXPIRY_README.md # Password expiry documentation
-└── README.md # This file
-
+├── BE/                                    # Backend Application
+│   ├── config/                           # Configuration files
+│   │   ├── cloudinary.config.js         # Cloud storage config
+│   │   └── mongoose.config.js           # Database configuration
+│   ├── router/                           # API routes
+│   │   ├── auth.routes.js               # Authentication routes
+│   │   └── index.js                     # Route aggregator
+│   ├── src/
+│   │   ├── controller/                   # Business logic controllers
+│   │   │   └── auth.controller.js
+│   │   ├── middleware/                   # Express middlewares
+│   │   │   ├── authcheck.js             # JWT authentication
+│   │   │   ├── uploader.js              # File upload handling
+│   │   │   └── validator.js             # Request validation
+│   │   ├── modal/                        # Database models
+│   │   │   └── auth.modal.js            # User model schema
+│   │   ├── services/                     # Business services
+│   │   │   ├── auth.service.js          # Authentication logic
+│   │   │   └── email.service.js         # Email service
+│   │   └── utils/                        # Utility functions
+│   │       ├── helper.js                # Helper functions
+│   │       └── validator/               # Input validators
+│   │           └── auth.validate.js
+│   ├── upload/                          # File upload directory
+│   ├── app.js                           # Express app setup
+│   └── package.json                     # Backend dependencies
+├── FE/                                   # Frontend Application
+│   ├── public/                          # Static assets
+│   │   └── vite.svg
+│   ├── src/
+│   │   ├── assets/                      # Images and icons
+│   │   │   ├── react.svg
+│   │   │   └── spinner.tsx
+│   │   ├── component/                   # Reusable components
+│   │   │   ├── Input.tsx               # Custom input component
+│   │   │   └── PasswordCheckWrapper.tsx
+│   │   ├── hooks/                       # Custom React hooks
+│   │   │   └── usePasswordStatus.ts
+│   │   ├── Pages/                       # Application pages
+│   │   │   ├── ChangePassword/         # Password change functionality
+│   │   │   │   └── index.tsx
+│   │   │   ├── CreatePassword/         # Password creation
+│   │   │   │   ├── index.tsx
+│   │   │   │   └── successPage.tsx
+│   │   │   ├── homepage.tsx/           # Dashboard/Home
+│   │   │   │   └── index.tsx
+│   │   │   ├── Login/                  # Login page
+│   │   │   │   └── index.tsx
+│   │   │   ├── Register/               # User registration
+│   │   │   │   ├── index.tsx
+│   │   │   │   └── successPage.tsx
+│   │   │   ├── UpdatePassword/         # Password updates
+│   │   │   │   ├── index.tsx
+│   │   │   │   └── successPage.tsx
+│   │   │   └── VarifyMail/             # Email verification
+│   │   │       ├── index.tsx
+│   │   │       └── successPage.tsx
+│   │   ├── Route/                       # Routing configuration
+│   │   │   ├── index.tsx               # Main router
+│   │   │   └── protectedRoute.tsx      # Route protection
+│   │   ├── utils/                       # Utility functions
+│   │   ├── App.tsx                      # Main app component
+│   │   ├── main.tsx                     # App entry point
+│   │   ├── index.css                    # Global styles
+│   │   └── vite-env.d.ts               # Vite environment types
+│   ├── eslint.config.js                # ESLint configuration
+│   ├── index.html                       # HTML template
+│   ├── package.json                     # Frontend dependencies
+│   ├── tsconfig.app.json               # TypeScript app config
+│   ├── tsconfig.json                    # TypeScript base config
+│   ├── tsconfig.node.json              # TypeScript node config
+│   └── vite.config.ts                  # Vite configuration
+└── README.md                            # Project documentation
 ```
 
 ## 🚀 Getting Started
 
-@@ -151,8 +161,8 @@ LoginPage/
+### **Prerequisites**
+
+- Node.js (v16 or higher)
+- MongoDB (local or cloud instance)
+- Git
+
+### **Backend Setup**
 
 1. **Navigate to backend directory:**
 
@@ -132,34 +153,102 @@ LoginPage/
    cd BE
    ```
 
-```
-
 2. **Install dependencies:**
 
-@@ -161,7 +171,7 @@ LoginPage/
-
-```
+   ```bash
+   npm install
+   ```
 
 3. **Environment Configuration:**
    Create a `.env` file in the BE directory:
 
-```env
-DBURL=mongodb://localhost:27017/your-database-name
-@@ -206,9 +216,11 @@ LoginPage/
+   ```env
+   DBURL=mongodb://localhost:27017/your-database-name
+   JWT_SECRET=your-super-secret-jwt-key
+   JWT_REFRESH_SECRET=your-refresh-token-secret
+   EMAIL_USER=your-email@gmail.com
+   EMAIL_PASS=your-app-password
+   CLOUDINARY_CLOUD_NAME=your-cloudinary-cloud-name
+   CLOUDINARY_API_KEY=your-cloudinary-api-key
+   CLOUDINARY_API_SECRET=your-cloudinary-api-secret
+   PORT=5000
+   ```
+
+4. **Start the backend server:**
+   ```bash
+   npm start
+   ```
+
+### **Frontend Setup**
+
+1. **Navigate to frontend directory:**
+
+   ```bash
+   cd FE
+   ```
+
+2. **Install dependencies:**
+
+   ```bash
+   npm install
+   ```
+
+3. **Start the development server:**
+
+   ```bash
+   npm run dev
+   ```
+
+4. **Build for production:**
+   ```bash
+   npm run build
+   ```
+
+## 📡 API Endpoints
+
 ### **Authentication Routes**
 
 ```
-
-POST /v1/auth/register # User registration
-POST /v1/auth/login # User login
+POST /v1/auth/register          # User registration
+POST /v1/auth/login             # User login
 POST /v1/auth/createpassword/:token # Account activation
-POST /v1/auth/changepassword # Password change (requires auth)
-GET /v1/auth/password-status # Check password expiry status
-
+POST /v1/auth/changepassword    # Password change (requires auth)
+POST /v1/auth/updatepassword    # Password update (requires auth)
+GET  /v1/auth/password-status   # Check password expiry status
 ```
 
 ### **Request/Response Examples**
-@@ -240,7 +252,39 @@ POST /v1/auth/createpassword/:token  # Account activation
+
+**User Registration:**
+
+```javascript
+// POST /v1/auth/register
+{
+  "fullName": "John Doe",
+  "email": "john@example.com"
+}
+
+// Response
+{
+  "success": true,
+  "msg": "Registration successful. Please check your email to activate your account."
+}
+```
+
+**User Login:**
+
+```javascript
+// POST /v1/auth/login
+{
+  "email": "john@example.com",
+  "password": "securePassword123"
+}
+
+// Response
+{
+  "success": true,
+  "data": {
+    "accessToken": "jwt-access-token",
     "refreshToken": "refresh-token",
     "data": { /* user data */ }
   },
@@ -199,31 +288,69 @@ GET /v1/auth/password-status # Check password expiry status
 }
 ```
 
-@@ -256,6 +300,8 @@ POST /v1/auth/createpassword/:token # Account activation
-status: ["active", "inactive"],
-activationToken: String,
-password: String,
-lastPasswordChange: Date, // New: tracks last password change
-passwordChangeRequired: Boolean, // New: flags if password change needed
-createdAt: Date,
-updatedAt: Date
+## 💾 Database Schema
+
+### **User Model**
+
+```javascript
+{
+  fullName: String,
+  email: String (unique),
+  avatar: String (URL),
+  status: ["active", "inactive"],
+  activationToken: String,
+  password: String,
+  lastPasswordChange: Date,        // Tracks last password change
+  passwordChangeRequired: Boolean, // Flags if password change needed
+  createdAt: Date,
+  updatedAt: Date
 }
-@@ -303,6 +349,8 @@ POST /v1/auth/createpassword/:token # Account activation
+```
+
+## 🔐 Security Features
+
+### **Password Security**
+
+- bcrypt hashing with salt rounds
+- Password strength validation
+- Secure password storage
+- **Automatic password expiry (180 days)**
+- **Password change enforcement**
+
+### **JWT Authentication**
+
+- Access tokens (short-lived)
+- Refresh tokens (long-lived)
+- Token validation middleware
+- Secure token storage
+
+### **Route Protection**
 
 - Protected routes requiring authentication
 - Account lockout after failed login attempts
 - Email verification for account activation
-- **Automatic password expiry enforcement (180 days)**
+- **Automatic password expiry enforcement**
 - **Password age tracking and validation**
 
 ### **Input Validation**
 
-@@ -320,26 +368,108 @@ POST /v1/auth/createpassword/:token # Account activation
+- Server-side validation using express-validator
+- Client-side validation with React Hook Form
+- XSS protection
+- SQL injection prevention
+
+### **File Upload Security**
+
+- File type validation
+- File size limits
+- Secure cloud storage (Cloudinary)
+
+### **Environment Security**
 
 - Secure HTTP headers
 - Environment variable protection
 
-## � Password Expiry System
+## 🔄 Password Expiry System
 
 This system implements automatic password expiry functionality to enhance security by ensuring users regularly update their passwords.
 
@@ -328,7 +455,26 @@ To test the password expiry feature:
 
 ### **File Upload Support**
 
-@@ -370,7 +500,7 @@ This project includes additional documentation for specific features:
+- Avatar upload functionality
+- Cloudinary integration for cloud storage
+- Image optimization and resizing
+- Secure file handling and validation
+
+### **Email Integration**
+
+- Account activation emails
+- Password reset notifications
+- Welcome emails
+- Security alerts
+
+### **Error Handling**
+
+- Comprehensive error handling
+- User-friendly error messages
+- Logging and monitoring
+- Graceful fallbacks
+
+## 🧪 Testing
 
 ### **Backend Testing**
 
@@ -337,14 +483,28 @@ cd BE
 npm test
 ```
 
-@@ -387,17 +517,28 @@ npm run build # Test build process
+### **Frontend Testing**
+
+```bash
+cd FE
+npm run test
+```
+
+### **Build Testing**
+
+```bash
+cd FE
+npm run build # Test build process
+```
+
+## 🔄 User Flows
 
 ### **User Registration Flow**
 
 1. User fills registration form
 2. Account created with 'inactive' status and `lastPasswordChange` set
 3. Activation email sent with token
-4. User clicks email link to activate account
+4. User clicks email link to activate and Create Password account
 5. User sets password, `lastPasswordChange` updated to current date
 6. Account becomes 'active' with 180-day password expiry countdown
 
@@ -367,15 +527,58 @@ npm test
 
 ## 🤝 Contributing
 
-@@ -428,6 +569,11 @@ For support and questions:
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 📞 Support
+
+For support and questions:
+
+- Create an issue in the GitHub repository
+- Email: sandeshbhusal417@gmail.com
+
+## 🗺️ Roadmap
+
+### **Upcoming Features**
+
+- [ ] Multi-factor authentication (MFA)
+- [ ] Social login integration
 - [ ] Audit logging
 - [ ] API rate limiting
 - [ ] Real-time notifications
 - [ ] **Configurable password expiry periods**
 - [ ] **Password complexity scoring**
-- [ ] **Multi-factor authentication (MFA)**
 - [ ] **Password breach detection**
 - [ ] **Account recovery workflows**
+- [ ] Admin dashboard
+- [ ] User analytics
+- [ ] Mobile app support
+
+## 🏆 Achievements
+
+- ✅ Secure authentication system
+- ✅ Modern React frontend
+- ✅ Password expiry enforcement
+- ✅ Email verification
+- ✅ File upload support
+- ✅ Responsive design
+- ✅ TypeScript integration
+- ✅ Comprehensive documentation
 
 ---
+
+**Built by Sandesh Bhusal | © 2025**
+
+<!-- <p align="center">
+  <img src="img1.jpg" width="80%" alt="Registration Page"/>
+  <img src="img2.jpg" width="80%" alt="Password Strength Feedback"/>
+  <img src="img3.jpg" width="80%" alt="Email Verification"/>
+  <img src="img4.jpg" width="80%" alt="reCAPTCHA Integration"/>
+</p> -->
