@@ -2,6 +2,24 @@
 
 A full-stack authentication system built with modern technologies. This project provides a secure, feature-rich user authentication solution with email verification, password management, and protected routes.
 
+## Screenshots
+
+<p align="center">
+   <div>Login Page</div>
+  <img src="./images/login.png" width="80%" alt="Registration Page"/>
+  <div>Register Page</div>
+  <img src="./images/register.png" width="80%" alt="Password Strength Feedback"/> 
+  <div>Captcha</div>
+  <img src="./images/captcha.png" width="80%" alt="reCAPTCHA Integration"/>
+  <div>Verify Mail</div> 
+  <img src="./images/verifymail.png" width="80%" alt="Verify Mail"/>
+  <div>Change Password Using Forgot password</div>
+  <img src="./images/forgotPassword.png" width="80%" alt="Forgot Password"/>
+  <div>Change Password After Login</div>
+  <img src="./images/changePassword.png" width="80%" alt="Change Password"/>
+
+</p>
+
 ## 🌟 Features
 
 ### 🔒 **Authentication & Security**
@@ -43,7 +61,6 @@ A full-stack authentication system built with modern technologies. This project 
 - **Authentication**: JWT (jsonwebtoken)
 - **Password Security**: bcrypt
 - **Email Service**: Nodemailer
-- **File Upload**: Multer with Cloudinary
 - **Validation**: express-validator
 - **Environment**: dotenv
 
@@ -85,7 +102,6 @@ LoginPage/
 │   │       ├── helper.js                # Helper functions
 │   │       └── validator/               # Input validators
 │   │           └── auth.validate.js
-│   ├── upload/                          # File upload directory
 │   ├── app.js                           # Express app setup
 │   └── package.json                     # Backend dependencies
 ├── FE/                                   # Frontend Application
@@ -215,77 +231,6 @@ POST /v1/auth/createpassword/:token # Account activation
 POST /v1/auth/changepassword    # Password change (requires auth)
 POST /v1/auth/updatepassword    # Password update (requires auth)
 GET  /v1/auth/password-status   # Check password expiry status
-```
-
-### **Request/Response Examples**
-
-**User Registration:**
-
-```javascript
-// POST /v1/auth/register
-{
-  "fullName": "John Doe",
-  "email": "john@example.com"
-}
-
-// Response
-{
-  "success": true,
-  "msg": "Registration successful. Please check your email to activate your account."
-}
-```
-
-**User Login:**
-
-```javascript
-// POST /v1/auth/login
-{
-  "email": "john@example.com",
-  "password": "securePassword123"
-}
-
-// Response
-{
-  "success": true,
-  "data": {
-    "accessToken": "jwt-access-token",
-    "refreshToken": "refresh-token",
-    "data": { /* user data */ }
-  },
-  "msg": "user logged in",
-  "passwordChangeRequired": false  // true if password expired
-}
-```
-
-**Change Password:**
-
-```javascript
-// POST /v1/auth/changepassword
-// Headers: Authorization: Bearer <token>
-{
-  "currentPassword": "oldPassword123",
-  "newPassword": "newPassword456"
-}
-
-// Response
-{
-  "success": true,
-  "msg": "Password changed successfully"
-}
-```
-
-**Password Status Check:**
-
-```javascript
-// GET /v1/auth/password-status
-// Headers: Authorization: Bearer <token>
-
-// Response
-{
-  "passwordChangeRequired": false,
-  "daysSinceLastChange": 45,
-  "lastPasswordChange": "2024-11-13T10:30:00Z"
-}
 ```
 
 ## 💾 Database Schema
@@ -453,13 +398,6 @@ To test the password expiry feature:
 - Form state management across components
 - Password expiry status monitoring and notifications
 
-### **File Upload Support**
-
-- Avatar upload functionality
-- Cloudinary integration for cloud storage
-- Image optimization and resizing
-- Secure file handling and validation
-
 ### **Email Integration**
 
 - Account activation emails
@@ -544,41 +482,4 @@ For support and questions:
 - Create an issue in the GitHub repository
 - Email: sandeshbhusal417@gmail.com
 
-## 🗺️ Roadmap
-
-### **Upcoming Features**
-
-- [ ] Multi-factor authentication (MFA)
-- [ ] Social login integration
-- [ ] Audit logging
-- [ ] API rate limiting
-- [ ] Real-time notifications
-- [ ] **Configurable password expiry periods**
-- [ ] **Password complexity scoring**
-- [ ] **Password breach detection**
-- [ ] **Account recovery workflows**
-- [ ] Admin dashboard
-- [ ] User analytics
-- [ ] Mobile app support
-
-## 🏆 Achievements
-
-- ✅ Secure authentication system
-- ✅ Modern React frontend
-- ✅ Password expiry enforcement
-- ✅ Email verification
-- ✅ File upload support
-- ✅ Responsive design
-- ✅ TypeScript integration
-- ✅ Comprehensive documentation
-
----
-
 **Built by Sandesh Bhusal | © 2025**
-
-<!-- <p align="center">
-  <img src="img1.jpg" width="80%" alt="Registration Page"/>
-  <img src="img2.jpg" width="80%" alt="Password Strength Feedback"/>
-  <img src="img3.jpg" width="80%" alt="Email Verification"/>
-  <img src="img4.jpg" width="80%" alt="reCAPTCHA Integration"/>
-</p> -->
