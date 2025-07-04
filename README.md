@@ -181,13 +181,8 @@ LoginPage/
    ```env
    DBURL=mongodb://localhost:27017/your-database-name
    JWT_SECRET=your-super-secret-jwt-key
-   JWT_REFRESH_SECRET=your-refresh-token-secret
    EMAIL_USER=your-email@gmail.com
    EMAIL_PASS=your-app-password
-   CLOUDINARY_CLOUD_NAME=your-cloudinary-cloud-name
-   CLOUDINARY_API_KEY=your-cloudinary-api-key
-   CLOUDINARY_API_SECRET=your-cloudinary-api-secret
-   PORT=5000
    ```
 
 4. **Start the backend server:**
